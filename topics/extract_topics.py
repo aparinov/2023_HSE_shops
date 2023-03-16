@@ -4,16 +4,16 @@ from bertopic.representation import MaximalMarginalRelevance
 representation_model = MaximalMarginalRelevance(diversity=0.3)
 
 
-def create_and_train_model(df, n_topics=10, embeddings=None):
+def create_and_train_model(texts, n_topics=10, embeddings=None):
     """
     создание и тренировка модели bertopic
     :param model:
     :return:
     """
     if embeddings is None:
-        return get_topics(df['item_name'].tolist(), n_topics)
+        return get_topics(texts, n_topics)
 
-    return get_topics_own_embeddings(df['item_name'].tolist(), embeddings, n_topics)
+    return get_topics_own_embeddings(texts, embeddings, n_topics)
 
 
 def get_topics(preprocessed_data, n_topics=10, n_gram_range=(2, 2)):

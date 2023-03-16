@@ -10,14 +10,14 @@ def get_topics_from_own_embeddings(n_topics = 15):
     df = df[['item_name', "category"]]
     df['item_name'] = df[['item_name']].applymap(tokenize_lemmatize_text)
     input_ids, attention_masks = vectorizing_funcs.get_bert_vector(df['item_name'].tolist())
-    topic_model, topics, probs = extract_topics.create_and_train_model(df, embeddings=input_ids, n_topics=n_topics)
+    topic_model, topics, probs = extract_topics.create_and_train_model(df['item_name'].tolist(), embeddings=input_ids, n_topics=n_topics)
     return topic_model, topics, probs
 
 def get_topics(n_topics = 15):
     df = pd.read_csv("../data/products.csv")
     df = df.rename(columns={"Наименование": "item_name"})
     df = df[['item_name', "category"]]
-    topic_model, topics, probs = extract_topics.create_and_train_model(df,n_topics=n_topics)
+    topic_model, topics, probs = extract_topics.create_and_train_model(df['item_name'].tolist(),n_topics=n_topics)
     return topic_model, topics, probs
 
 
